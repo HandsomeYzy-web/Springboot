@@ -34,7 +34,9 @@ public class Service {
 
     public boolean checkUser(User user) {
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-        userQueryWrapper.eq("username", user.getUsername()).eq("type", "user");
+        userQueryWrapper.eq("username", user.getUsername()).eq("type", user.getType());
+        if (!user.getType().equals("user"))
+            userQueryWrapper.eq("password", user.getPassword());
         return userMapper.selectOne(userQueryWrapper) != null;
     }
 
