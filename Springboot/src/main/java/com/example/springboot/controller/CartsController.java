@@ -20,7 +20,7 @@ public class CartsController {
     @Operation(summary = "购物车存储")
     public ResponseEntity<Void> settleCarts(@RequestBody Carts[] carts) {
         try {
-            service.deleteCarts(carts[1].getUserName());
+            service.deleteCarts(carts[0].getUserName());
             service.insertCarts(carts);
             return ResponseEntity.ok().build();
         } catch (SQLException e) {

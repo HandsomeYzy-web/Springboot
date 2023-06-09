@@ -11,5 +11,5 @@ import java.util.List;
 public interface AddressMapper extends BaseMapper<Address> {
 
     @Select("select * from address where username=#{username}")
-    List<Address> select666(String username);
+    List<Address> selectAddress(String username);
 }

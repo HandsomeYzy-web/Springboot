@@ -23,12 +23,9 @@ public class MenuController {
     @RequestMapping(value = "/getMenu", method = RequestMethod.GET)
     @Operation(summary = "获取菜单")
     public ResponseEntity<Object> getMenu() {
-        Connection conn = null;
         try {
-
             List<Menu> menuList = new ArrayList<>();
             menuList = service.queryMenu();
-
             if (menuList.isEmpty()) {
                 return ResponseEntity.status(404).build();
             } else {

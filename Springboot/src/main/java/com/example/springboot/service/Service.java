@@ -29,7 +29,7 @@ public class Service {
     }
 
     public List<Address> queryAddress(String username) {
-        return addressMapper.select666(username);
+        return addressMapper.selectAddress(username);
     }
 
     public boolean checkUser(User user) {
