@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class settleCarts {
-    private Integer menu_id;
+    private Integer menuId;
     private Integer quantity;
     private String name;
     private Integer price;

@@ -14,8 +14,8 @@ public class AddressController {
     @Autowired
     Service service;
     @PostMapping("/add")
-    public ResponseEntity<Object> Addinfo(@RequestBody Address address){
-        if(service.insertInfo(address)){
+    public ResponseEntity<Object> addAddress(@RequestBody Address address){
+        if(service.createAddress(address)){
             return ResponseEntity.ok("ok");
         }
         else {
@@ -24,6 +24,6 @@ public class AddressController {
     }
     @GetMapping("/select")
     public List<Address> search(String username){
-        return service.searchInfo(username);
+        return service.queryAddress(username);
     }
 }
