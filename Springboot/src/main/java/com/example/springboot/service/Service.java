@@ -1,10 +1,7 @@
 package com.example.springboot.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.springboot.mapper.AddressMapper;
-import com.example.springboot.mapper.CartsMapper;
-import com.example.springboot.mapper.MenuMapper;
-import com.example.springboot.mapper.UserMapper;
+import com.example.springboot.mapper.*;
 import com.example.springboot.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +20,10 @@ public class Service {
     CartsMapper cartsMapper;
     @Autowired
     MenuMapper menuMapper;
+    @Autowired
+    OrderMapper orderMapper;
+    @Autowired
+    OrderDetailsMapper orderDetailsMapper;
 
     public boolean createAddress(Address address) {
         return addressMapper.insert(address) > 0;
@@ -44,7 +45,7 @@ public class Service {
         userMapper.insert(user);
     }
 
-    public void deleteCarts(String userName) {
+    public void deleteCarts(String userName) throws SQLException {
         cartsMapper.deleteById(userName);
     }
 
@@ -60,5 +61,15 @@ public class Service {
 
     public List<Menu> queryMenu() throws SQLException {
         return menuMapper.selectList(null);
+    }
+
+    public void insertOrder(Order order) throws SQLException {
+        orderMapper.insert(order);
+    }
+
+    public void insertOrderDetails(OrderDetails[]  orderDetails) throws SQLException{
+        for (OrderDetails orderDetail: orderDetails) {
+            orderDetailsMapper.insert(orderDetail);
+        }
     }
 }
