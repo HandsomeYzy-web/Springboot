@@ -1,6 +1,7 @@
 package com.example.springboot.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -8,7 +9,7 @@ import lombok.Data;
 @TableName("orders")
 public class Order {
     private String username;
-    @TableField("orderNum")
+    @TableId("orderNum")
     private String orderNum;
     @TableField("orderTime")
     private String orderTime;

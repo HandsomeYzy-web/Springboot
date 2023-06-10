@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.sql.SQLException;
 import java.util.List;
 
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @org.springframework.stereotype.Service
 public class Service {
     @Autowired
@@ -24,6 +25,8 @@ public class Service {
     OrderMapper orderMapper;
     @Autowired
     OrderDetailsMapper orderDetailsMapper;
+    @Autowired
+    ReceiveMapper receiveMapper;
 
     public boolean createAddress(Address address) {
         return addressMapper.insert(address) > 0;
@@ -71,5 +74,34 @@ public class Service {
         for (OrderDetails orderDetail: orderDetails) {
             orderDetailsMapper.insert(orderDetail);
         }
+    }
+
+    public List<Order> getOrder(String delivery) {
+        return orderMapper.selectOrder(delivery);
+    }
+
+    public List<Order> getOrders() {
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.eq("status", 0);
+        return orderMapper.selectList(wrapper);
+    }
+
+
+    public boolean checkOrder(Receive receive) {
+        return receiveMapper.insert(receive) > 0;
+    }
+
+    public boolean setStatus(String orderNum, int status) {
+        Order order = orderMapper.selectById(orderNum);
+        order.setStatus(status);
+        return orderMapper.updateById(order) > 0;
+    }
+
+    public boolean queryReceive(String orderNum) {
+        return receiveMapper.selectById(orderNum) != null;
+    }
+
+    public void deleteReceive(Receive receive) {
+        receiveMapper.deleteById(receive);
     }
 }
