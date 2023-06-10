@@ -104,4 +104,8 @@ public class Service {
     public void deleteReceive(Receive receive) {
         receiveMapper.deleteById(receive);
     }
+
+    public List<MyOrder> getMyOrder(String username){
+        return orderMapper.selectMyOrder(username);
+    }
 }
